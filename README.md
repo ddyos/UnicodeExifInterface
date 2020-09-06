@@ -13,7 +13,7 @@ Write "UserComment" :
 
 Read "UserComment" :
 - For Unicode values, return an UTF-16 string.
-- Otherwise, retrun an ASCII String, just like Android Jetpack's ExifInterface lib.
+- Otherwise, return an ASCII String, just like Android Jetpack's ExifInterface lib.
 
 ## Setup
 1. Add JitPack in your root build.gradle at the end of repositories:
@@ -29,7 +29,7 @@ allprojects {
 ```gradle
 dependencies {
     // please use Latest Version
-    implementation 'com.github.ddyos:UnicodeExifInterface:1.2.0'
+    implementation 'com.github.ddyos:UnicodeExifInterface:1.2.1'
 }
 ```
 3. Use. Similar to the Android Jetpack's ExifInterface lib:

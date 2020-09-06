@@ -3233,23 +3233,21 @@ public class UnicodeExifInterface {
 
         String getUnicodeString(int mimeType, ByteOrder byteOrder) {
             //try Unicode
-            int index = 0;
             if (numberOfComponents >= EXIF_UNICODE_PREFIX.length) {
-                boolean same = true;
+                boolean isUnicode = true;
                 for (int i = 0; i < EXIF_UNICODE_PREFIX.length; ++i) {
                     if (bytes[i] != EXIF_UNICODE_PREFIX[i]) {
-                        same = false;
+                        isUnicode = false;
                         break;
                     }
                 }
-                if (same) {
-                    index = EXIF_UNICODE_PREFIX.length;
+                if (isUnicode) {
+                    byte[] commentBytes = new byte[bytes.length - EXIF_UNICODE_PREFIX.length];
+                    System.arraycopy(bytes, EXIF_UNICODE_PREFIX.length, commentBytes, 0, commentBytes.length);
+                    return new String(commentBytes, getUnicodeCharset(mimeType));
                 }
-                byte[] commentBytes = new byte[bytes.length - index];
-                System.arraycopy(bytes, index, commentBytes, 0, bytes.length - index);
-                return new String(commentBytes, getUnicodeCharset(mimeType));
             }
-            //ASCII
+            //otherwise ASCII
             return getValue(byteOrder).toString();
         }
 
